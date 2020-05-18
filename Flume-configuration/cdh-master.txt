@@ -1,0 +1,205 @@
+## Agent (cdh-master) 
+## 组件
+a1.sources= r1 r2 r3 r4 r5 r6 
+a1.channels= c1 c2 c3 c4 c5 c6
+a1.sinks= k1 k2 k3 k4 k5 k6
+
+## source1
+a1.sources.r1.type = org.apache.flume.source.kafka.KafkaSource
+a1.sources.r1.batchSize = 5000
+a1.sources.r1.batchDurationMillis = 2000
+a1.sources.r1.kafka.bootstrap.servers = 192.168.30.151:9092,192.168.30.152:9092,192.168.30.153:9092
+a1.sources.r1.kafka.topics= agent_redis_replication
+
+
+## source2
+a1.sources.r2.type = org.apache.flume.source.kafka.KafkaSource
+a1.sources.r2.batchSize = 5000
+a1.sources.r2.batchDurationMillis = 2000
+a1.sources.r2.kafka.bootstrap.servers = 192.168.30.151:9092,192.168.30.152:9092,192.168.30.153:9092
+a1.sources.r2.kafka.topics= agent_redis_server
+
+
+## source3
+a1.sources.r3.type = org.apache.flume.source.kafka.KafkaSource
+a1.sources.r3.batchSize = 5000
+a1.sources.r3.batchDurationMillis = 2000
+a1.sources.r3.kafka.bootstrap.servers = 192.168.30.151:9092,192.168.30.152:9092,192.168.30.153:9092
+a1.sources.r3.kafka.topics= agent_redis_stats
+
+
+## source4
+a1.sources.r4.type = org.apache.flume.source.kafka.KafkaSource
+a1.sources.r4.batchSize = 5000
+a1.sources.r4.batchDurationMillis = 2000
+a1.sources.r4.kafka.bootstrap.servers = 192.168.30.151:9092,192.168.30.152:9092,192.168.30.153:9092
+a1.sources.r4.kafka.topics= agent_host_sys
+
+
+## source5
+a1.sources.r5.type = org.apache.flume.source.kafka.KafkaSource
+a1.sources.r5.batchSize = 5000
+a1.sources.r5.batchDurationMillis = 2000
+a1.sources.r5.kafka.bootstrap.servers = 192.168.30.151:9092,192.168.30.152:9092,192.168.30.153:9092
+a1.sources.r5.kafka.topics= agent_host_hostmem
+
+
+## source6
+a1.sources.r6.type = org.apache.flume.source.kafka.KafkaSource
+a1.sources.r6.batchSize = 5000
+a1.sources.r6.batchDurationMillis = 2000
+a1.sources.r6.kafka.bootstrap.servers = 192.168.30.151:9092,192.168.30.152:9092,192.168.30.153:9092
+a1.sources.r6.kafka.topics= agent_host_hostcpu
+
+
+
+## channel1
+a1.channels.c1.type= memory
+a1.channels.c1.capacity= 100000
+a1.channels.c1.transactionCapacity= 10000
+
+## channel2
+a1.channels.c2.type= memory
+a1.channels.c2.capacity= 1000000
+a1.channels.c2.transactionCapacity= 10000
+
+## channel3
+a1.channels.c3.type= memory
+a1.channels.c3.capacity= 100000
+a1.channels.c3.transactionCapacity= 10000
+
+
+## channel4
+a1.channels.c4.type= memory
+a1.channels.c4.capacity= 100000
+a1.channels.c4.transactionCapacity= 10000
+
+## channel5
+a1.channels.c5.type= memory
+a1.channels.c5.capacity= 1000000
+a1.channels.c5.transactionCapacity= 10000
+
+## channel6
+a1.channels.c6.type= memory
+a1.channels.c6.capacity= 100000
+a1.channels.c6.transactionCapacity= 10000
+
+
+## sink1
+a1.sinks.k1.type = hdfs
+a1.sinks.k1.hdfs.filePrefix = logreplication-
+a1.sinks.k1.hdfs.round = true
+a1.sinks.k1.hdfs.roundValue = 10
+a1.sinks.k1.hdfs.roundUnit = second
+a1.sinks.k1.hdfs.path = /origin_data/warn/log/topic_redis_replication/%Y-%m-%d
+
+
+
+##sink2
+a1.sinks.k2.type = hdfs
+a1.sinks.k2.hdfs.filePrefix = logeserver-
+a1.sinks.k2.hdfs.round = true
+a1.sinks.k2.hdfs.roundValue = 10
+a1.sinks.k2.hdfs.roundUnit = second
+a1.sinks.k2.hdfs.path = /origin_data/warn/log/topic_redis_server/%Y-%m-%d
+
+##sink3
+a1.sinks.k3.type = hdfs
+
+a1.sinks.k3.hdfs.filePrefix = logstats-
+a1.sinks.k3.hdfs.round = true
+a1.sinks.k3.hdfs.roundValue = 10
+a1.sinks.k3.hdfs.roundUnit = second
+a1.sinks.k3.hdfs.path = /origin_data/warn/log/topic_redis_stats/%Y-%m-%d
+
+
+##sink4
+a1.sinks.k4.type = hdfs
+
+a1.sinks.k4.hdfs.filePrefix = loghostsys-
+a1.sinks.k4.hdfs.round = true
+a1.sinks.k4.hdfs.roundValue = 10
+a1.sinks.k4.hdfs.roundUnit = second
+a1.sinks.k4.hdfs.path = /origin_data/warn/log/topic_host_sys/%Y-%m-%d
+
+
+##sink5
+a1.sinks.k5.type = hdfs
+
+a1.sinks.k5.hdfs.filePrefix = loghostmem-
+a1.sinks.k5.hdfs.round = true
+a1.sinks.k5.hdfs.roundValue = 10
+a1.sinks.k5.hdfs.roundUnit = second
+a1.sinks.k5.hdfs.path = /origin_data/warn/log/topic_host_hostmem/%Y-%m-%d
+
+
+##sink6
+a1.sinks.k6.type = hdfs
+
+a1.sinks.k6.hdfs.filePrefix = loghostcpu-
+a1.sinks.k6.hdfs.round = true
+a1.sinks.k6.hdfs.roundValue = 10
+a1.sinks.k6.hdfs.roundUnit = second
+a1.sinks.k6.hdfs.path = /origin_data/warn/log/topic_host_hostcpu/%Y-%m-%d
+
+
+
+## 不要产生大量小文件
+a1.sinks.k1.hdfs.rollInterval = 7200
+a1.sinks.k1.hdfs.rollSize = 134217728
+a1.sinks.k1.hdfs.rollCount = 0
+
+a1.sinks.k2.hdfs.rollInterval = 7200
+a1.sinks.k2.hdfs.rollSize = 134217728
+a1.sinks.k2.hdfs.rollCount = 0
+
+a1.sinks.k3.hdfs.rollInterval = 7200
+a1.sinks.k3.hdfs.rollSize = 134217728
+a1.sinks.k3.hdfs.rollCount = 0
+
+
+a1.sinks.k4.hdfs.rollInterval = 7200
+a1.sinks.k4.hdfs.rollSize = 134217728
+a1.sinks.k4.hdfs.rollCount = 0
+
+a1.sinks.k5.hdfs.rollInterval = 7200
+a1.sinks.k5.hdfs.rollSize = 134217728
+a1.sinks.k5.hdfs.rollCount = 0
+
+a1.sinks.k6.hdfs.rollInterval = 7200
+a1.sinks.k6.hdfs.rollSize = 134217728
+a1.sinks.k6.hdfs.rollCount = 0
+
+## 控制输出文件是原生文件。
+a1.sinks.k1.hdfs.fileType = CompressedStream 
+a1.sinks.k2.hdfs.fileType = CompressedStream 
+a1.sinks.k3.hdfs.fileType = CompressedStream 
+a1.sinks.k4.hdfs.fileType = CompressedStream 
+a1.sinks.k5.hdfs.fileType = CompressedStream 
+a1.sinks.k6.hdfs.fileType = CompressedStream 
+
+a1.sinks.k1.hdfs.codeC = Snappy
+a1.sinks.k2.hdfs.codeC = Snappy
+a1.sinks.k3.hdfs.codeC = Snappy
+a1.sinks.k4.hdfs.codeC = Snappy
+a1.sinks.k5.hdfs.codeC = Snappy
+a1.sinks.k6.hdfs.codeC = Snappy
+
+## 拼装
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel= c1
+
+a1.sources.r2.channels = c2
+a1.sinks.k2.channel= c2
+
+a1.sources.r3.channels = c3
+a1.sinks.k3.channel= c3
+
+a1.sources.r4.channels = c4
+a1.sinks.k4.channel= c4
+
+a1.sources.r5.channels = c5
+a1.sinks.k5.channel= c5
+
+a1.sources.r6.channels = c6
+a1.sinks.k6.channel= c6
